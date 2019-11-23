@@ -3,28 +3,33 @@ package main
 import "fmt"
 
 func main() {
-	array := []int{3, 2, 8, 12, 4, 1, 20, 5}
+	array := []int{3, 2, 1, 20, 5, 6, 42, -2, 4, 3, 19}
+	sort(array)
 
-	fmt.Printf("Array before sorting: %v\n", array)
-
-	for i := 1; i < len(array); i++ {
-		insert(array, i-1, array[i])
-	}
-
-	fmt.Printf("Array after sorting: %v\n", array)
+	fmt.Println(array)
 }
 
-func insert(array []int, rightIndex int, value int) {
-	for i := rightIndex; array[i] > value; i-- {
-		if i == 0 {
-			array[1] = array[0]
-			array[0] = value
-			break
+func sort(array []int) {
+	for i := 0; i < len(array)-1; i++ {
+		min := i
+
+		for i2 := i; i2 < len(array); i2++ {
+			if array[i2] < array[min] {
+				min = i2
+			}
 		}
 
-		swapValue := array[i]
-
-		array[i] = value
-		array[i+1] = swapValue
+		fmt.Printf("Swap %d with %d\n", array[i], array[min])
+		swap(array, i, min)
 	}
+}
+
+func swap(array []int, first int, second int) {
+	if array[first] == array[second] {
+		return
+	}
+
+	swap := array[first]
+	array[first] = array[second]
+	array[second] = swap
 }
