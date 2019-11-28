@@ -29,11 +29,5 @@ func sort(array []int) {
 }
 
 func swap(array []int, first int, second int) {
-	if array[first] == array[second] {
-		return
-	}
-
-	swap := array[first]
-	array[first] = array[second]
-	array[second] = swap
+	array[first], array[second] = array[second], array[first]
 }
